@@ -44,7 +44,7 @@ public extension EasyTipView {
      - parameter preferences: The preferences which will configure the EasyTipView.
      - parameter delegate:    The delegate.
      */
-    class func show(animated: Bool = true, forItem item: UIBarItem, withinSuperview superview: UIView? = nil, text: String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
+    class func show(animated: Bool = true, forItem item: UIBarItem, withinSuperview superview: UIView, text: String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
         
         if let view = item.view {
             show(animated: animated, forView: view, withinSuperview: superview, text: text, preferences: preferences, delegate: delegate)
@@ -61,7 +61,7 @@ public extension EasyTipView {
      - parameter preferences: The preferences which will configure the EasyTipView.
      - parameter delegate:    The delegate.
      */
-    class func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView? = nil, text:  String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
+    class func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView, text:  String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
         
         let ev = EasyTipView(text: text, preferences: preferences, delegate: delegate)
         ev.show(animated: animated, forView: view, withinSuperview: superview)
@@ -77,7 +77,7 @@ public extension EasyTipView {
      - parameter preferences: The preferences which will configure the EasyTipView.
      - parameter delegate:    The delegate.
      */
-    class func show(animated: Bool = true, forItem item: UIBarItem, withinSuperview superview: UIView? = nil, contentView: UIView, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
+    class func show(animated: Bool = true, forItem item: UIBarItem, withinSuperview superview: UIView, contentView: UIView, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
         
         if let view = item.view {
             show(animated: animated, forView: view, withinSuperview: superview, contentView: contentView, preferences: preferences, delegate: delegate)
@@ -94,7 +94,7 @@ public extension EasyTipView {
      - parameter preferences: The preferences which will configure the EasyTipView.
      - parameter delegate:    The delegate.
      */
-    class func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView? = nil, contentView: UIView, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
+    class func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView, contentView: UIView, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
         
         let ev = EasyTipView(contentView: contentView, preferences: preferences, delegate: delegate)
         ev.show(animated: animated, forView: view, withinSuperview: superview)
@@ -109,7 +109,7 @@ public extension EasyTipView {
      - parameter item:      The UIBarButtonItem or UITabBarItem instance which the EasyTipView will be pointing to.
      - parameter superview: A view which is part of the UIBarButtonItem instances superview hierarchy. Ignore this parameter in order to display the EasyTipView within the main window.
      */
-    func show(animated: Bool = true, forItem item: UIBarItem, withinSuperView superview: UIView? = nil) {
+    func show(animated: Bool = true, forItem item: UIBarItem, withinSuperView superview: UIView) {
         if let view = item.view {
             show(animated: animated, forView: view, withinSuperview: superview)
         }
@@ -122,11 +122,11 @@ public extension EasyTipView {
      - parameter view:      The UIView instance which the EasyTipView will be pointing to.
      - parameter superview: A view which is part of the UIView instances superview hierarchy. Ignore this parameter in order to display the EasyTipView within the main window.
      */
-    func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView? = nil) {
+    func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView) {
         
-        precondition(superview == nil || view.hasSuperview(superview!), "The supplied superview <\(superview!)> is not a direct nor an indirect superview of the supplied reference view <\(view)>. The superview passed to this method should be a direct or an indirect superview of the reference view. To display the tooltip within the main window, ignore the superview parameter.")
+        precondition(superview == nil || view.hasSuperview(superview), "The supplied superview <\(superview)> is not a direct nor an indirect superview of the supplied reference view <\(view)>. The superview passed to this method should be a direct or an indirect superview of the reference view. To display the tooltip within the main window, ignore the superview parameter.")
         
-        let superview = superview ?? UIApplication.shared.windows.first!
+        //let superview = superview ?? UIApplication.shared.windows.first!
         
         let initialTransform = preferences.animating.showInitialTransform
         let finalTransform = preferences.animating.showFinalTransform
